@@ -71,6 +71,12 @@ const getLyric = async (artist, title) => {
    }
 }
 
+document.getElementById("search-filed").addEventListener("keyup", function(event) {
+   if (event.key === 'Enter') {
+       document.getElementById("searchButton").click();
+   }
+});
+
 const displayLyric = lyrics => {
    const songLyric = document.getElementById('song-lyrics');
    songLyric.innerText = lyrics;
