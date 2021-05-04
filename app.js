@@ -13,6 +13,7 @@ const searchSongs = async () => {
    const url = `https://api.lyrics.ovh/suggest/${searchText}`
    try{
       // load data
+      toggleSpinner()
       const res = await fetch(url);
       const data = await res.json();
       displaySongs(data.data)
@@ -43,6 +44,8 @@ const displaySongs = songs => {
       songDiv.innerHTML = songInfo;
       songContainer.appendChild(songDiv)
    });
+
+   toggleSpinner()
 }
 
 // const getLyric =  (artist, title) => {
@@ -58,6 +61,7 @@ const getLyric = async (artist, title) => {
    const url = `https://api.lyrics.ovh/v1/${artist}/${title}`;
    try{
       // load data
+      toggleSpinner()
       const res = await fetch(url)
       const data = await res.json()
       displayLyric(data.lyrics)
@@ -70,8 +74,14 @@ const getLyric = async (artist, title) => {
 const displayLyric = lyrics => {
    const songLyric = document.getElementById('song-lyrics');
    songLyric.innerText = lyrics;
+   toggleSpinner()
 }
 
 const displayError = error => {
    document.getElementById('custom-arror').innerText = error;
+}
+
+const toggleSpinner = (show) => {
+   const spinner = document.getElementById('toggle-spinner');
+   spinner.classList.toggle('d-none')
 }
